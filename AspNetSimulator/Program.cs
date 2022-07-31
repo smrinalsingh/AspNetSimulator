@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AspNetSimulator.Data.Extensions;
-using AspNetSimulator.Data.Config;
 
 namespace AspNetSimulator
 {
@@ -13,17 +11,13 @@ namespace AspNetSimulator
         static async Task Main(string[] args)
         {
             IHostBuilder hostBuilder = new HostBuilder()
-                .ConfigureAppConfiguration((hostingContext, configuration) =>
+                .ConfigureAppConfiguration((hostingContext, host) =>
                 {
-                    configuration.AddJsonFile("appConfig.json", true, true);
-                    configuration.AddEnvironmentVariables();
+                    host.UseCustomBuilder();
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {
-                    services.AddOptions();
-                    services.Configure<HttpConfig>(hostingContext.Configuration.GetSection("Listener"));
-                    services.Configure<RouteConfig>(hostingContext.Configuration.GetSection("Route"));
-                    services.AddCustomInjections();
+                    services.AddCustomInjections(hostingContext);
                     services.AddSingleton<IHostedService, AspNetSimulator>();
                 })
                 .ConfigureLogging((hostingContext, logging) =>

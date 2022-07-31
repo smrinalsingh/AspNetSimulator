@@ -1,19 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AspNetSimulator.Data;
 using AspNetSimulator.Data.Contracts;
 using AspNetSimulator.Data.Implementations;
+using AspNetSimulator.Data.Config;
 
 namespace AspNetSimulator.Data.Extensions
 {
     public static class Services
     {
-        public static IServiceCollection AddCustomInjections(this IServiceCollection services)
+        public static IServiceCollection AddCustomInjections(this IServiceCollection services, Microsoft.Extensions.Hosting.HostBuilderContext hostingContext)
         {
+            services.AddOptions();
+            services.Configure<HttpConfig>(hostingContext.Configuration.GetSection("Listener"));
+            services.Configure<RouteConfig>(hostingContext.Configuration.GetSection("Route"));
             services.AddSingleton<IListener, Listener>();
             services.AddSingleton<IRoute, Route>();
             services.AddSingleton<IRequestHandler, RequestHandler>();

@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using System.Net;
+﻿using System.Net;
+using Microsoft.Extensions.Options;
 using AspNetSimulator.Data.Contracts;
 using AspNetSimulator.Data.Config;
 

@@ -1,21 +1,15 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System.Net;
-using System.Text;
 using AspNetSimulator.Data.Contracts;
-using AspNetSimulator.Data.Config;
 
 namespace AspNetSimulator
 {
     internal class AspNetSimulator : IHostedService, IDisposable
     {
-        private readonly IOptions<HttpConfig> _appConfig;
         private readonly IListener _listenerConfig;
         private readonly HttpListener Listener;
-        public AspNetSimulator(IOptions<HttpConfig> appConfig, IRequestHandler requestHandler, IListener listenerConfig)
+        public AspNetSimulator(IRequestHandler requestHandler, IListener listenerConfig)
         {
-            _appConfig = appConfig;
             _listenerConfig = listenerConfig;
             Listener = listenerConfig.GetListener();
         }
