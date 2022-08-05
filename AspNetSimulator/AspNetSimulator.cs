@@ -8,7 +8,7 @@ namespace AspNetSimulator
     {
         private readonly IListener _listenerConfig;
         private readonly HttpListener Listener;
-        public AspNetSimulator(IRequestHandler requestHandler, IListener listenerConfig)
+        public AspNetSimulator(IListener listenerConfig)
         {
             _listenerConfig = listenerConfig;
             Listener = listenerConfig.GetListener();

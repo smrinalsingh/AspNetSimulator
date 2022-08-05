@@ -9,13 +9,11 @@ namespace AspNetSimulator.Data.Implementations
     {
         private HttpListener _listener = new HttpListener();
         private IOptions<HttpConfig> _httpConfig;
-        private IRoute _routeConfig;
         private IRequestHandler _handler;
 
-        public Listener(IOptions<HttpConfig> httpConfig, IRoute route, IRequestHandler handler)
+        public Listener(IOptions<HttpConfig> httpConfig, IRequestHandler handler)
         {
             _httpConfig = httpConfig;
-            _routeConfig = route;
             _handler = handler;
         }
 
