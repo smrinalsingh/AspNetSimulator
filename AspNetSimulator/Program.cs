@@ -26,7 +26,14 @@ namespace AspNetSimulator
                     logging.AddConsole();
                 });
 
+            AppDomain.CurrentDomain.UnhandledException += UnhandledException;
+
             await hostBuilder.RunConsoleAsync();
+        }
+
+        private static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine("Unhandled Exception: " + e.ExceptionObject.ToString());
         }
     }
 }
