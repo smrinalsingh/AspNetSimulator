@@ -9,9 +9,13 @@ namespace AspNetSimulator.Controllers
 {
     internal class HomeController : IControllerBase
     {
+        public string Index()
+        {
+            return "HomeController/Index responds!";
+        }
         public string GetName()
         {
-            return "HomeController Responds";
+            return "HomeController/GetName responds!";
         }
     }
 }
